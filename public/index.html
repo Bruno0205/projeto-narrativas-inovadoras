@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,146 +9,227 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* Estilos Inline para testar */
         body {
             font-family: 'Quicksand', sans-serif;
-            background-color: #f4f7fb;
-            color: #333;
             margin: 0;
             padding: 0;
+            background-color: #e6ecf0;
+            color: #333;
         }
 
         header {
-            background-color: #005f73;
+            background-color: #2d3e50;
             color: #fff;
-            padding: 20px;
+            padding: 20px 0;
             text-align: center;
-        }
-
-        h1 {
-            font-size: 2em;
-        }
-
-        main {
-            padding: 20px;
-        }
-
-        .texto-inicial,
-        .texto-final {
-            margin-bottom: 20px;
-        }
-
-        .grafico-e-texto {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .texto {
-            flex: 1;
-            padding-right: 20px;
-        }
-
-        .grafico {
-            flex: 2;
-            height: 300px;
-            background-color: #e0f7fa;
-            /* Um fundo leve só para visualização */
-        }
-
-
-        .flip-card-section {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .flip-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .flip-card {
-            background-color: transparent;
-            width: 200px;
-            height: 250px;
-            perspective: 1000px;
-        }
-
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-        }
-
-        .flip-card:hover .flip-card-inner {
-            transform: rotateY(180deg);
-        }
-
-        .flip-card-front,
-        .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .flip-card-front {
-            background-color: #0077b6;
-            color: white;
-        }
-
-        .flip-card-back {
-            background-color: #48cae4;
-            color: black;
-            transform: rotateY(180deg);
         }
 
         footer {
-            background-color: #333;
+            background-color: #2d3e50;
             color: #fff;
-            text-align: left;
-            padding: 10px;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
+            text-align: left; /* Alinha o conteúdo à esquerda */
+            padding: 20px 10px;
+            margin-top: 40px;
         }
 
-        footer p {
-            margin: 0;
+        /* Texto Inicial e Final */
+        main section.texto-inicial,
+        main section.texto-final {
+            padding: 40px 20px;
+            max-width: 800px;
+            margin: 0 auto;
         }
+
+        /* Seção Gráfico + Texto lado a lado */
+        .grafico-e-texto {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: stretch; /* Faz com que o gráfico acompanhe a altura do texto */
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 20px;
+        }
+
+            .grafico-e-texto .texto {
+                flex: 1 1 55%;
+                max-width: 55%;
+            }
+
+            .grafico-e-texto .grafico {
+                flex: 1 1 40%;
+                max-width: 40%;
+                background-color: #ffffff;
+                padding: 20px;
+                border-radius: 12px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                /* Para garantir que o gráfico se ajuste sem descer ou ficar fora de proporção */
+                height: auto;
+            }
+
+        #sunburst-graph {
+            width: 100%;
+            height: 100%;
+        }
+        h1, h2 {
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        /* Daqui pra baixo é referente ao cards-grid e flip cards */
+        .cards-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .card {
+            height: 400px;
+            width: 250px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            padding: 15px;
+            perspective: 1000px; /* Para o efeito de 3D */
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+
+        .card img {
+            width: 100%;
+            height: 60%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .card.flipped .card-inner {
+            transform: rotateY(180deg); /* Efeito de flip */
+        }
+
+        .card-front,
+        .card-back {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            background: white;
+        }
+
+        .card-front {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-front h3,
+        .card-front p {
+            margin: 5px 0;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .card-back p {
+            margin: 10px 0;
+        }
+
+        /*grafico linha------------------------------------------------------*/
+    #grafico {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    select {
+      display: block;
+      margin: 20px auto;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+      cursor: pointer;
+    }
+
+    select:hover {
+      border-color: #007bff; /* Azul vibrante no hover */
+    }
+    .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
+
+    .image-container {
+        position: relative;
+        width: 80%;
+        max-width: 500px;
+        height: auto;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        border: 2px solid #333;
+        border-radius: 10px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+
     </style>
 
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
-
 <body>
     <!-- Cabeçalho -->
     <header>
-        <h1>Meu Editorial Interativo</h1>
+        <h1>Autoritarismo & Avanço Conservador</h1>
     </header>
 
     <!-- Corpo principal -->
     <main>
         <section class="texto-inicial">
-            <h2>Bem-vindo ao Meu Projeto Editorial</h2>
+            <h2>Introdução</h2>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet...
+                .
             </p>
         </section>
 
-        <!-- Seção com gráfico e texto lado a lado -->
+        <!-- Seção com gráfico sunburst e texto -->
         <section class="grafico-e-texto">
             <div class="texto">
-                <h2>Composição Política da Bancada</h2>
+                <h2>Composição Política da Bancada Atualmente</h2>
                 <p>
                     Aqui está a composição atual da bancada evangélica na ALEPE. A seguir, mostramos a distribuição dos partidos e seus respectivos deputados.
                 </p>
@@ -157,81 +237,67 @@
             <div class="grafico">
                 <div id="sunburst-graph"></div>
             </div>
-
         </section>
-        <section class="flip-card-section">
-            <h2>Informações Relevantes</h2>
-            <div class="flip-container">
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <h3>Frente do Cartão 1</h3>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>Texto da parte de trás do cartão 1.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <h3>Frente do Cartão 2</h3>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>Texto da parte de trás do cartão 2.</p>
-                        </div>
-                    </div>
-                </div>
+
+        <!--Cards grid e flip cards-->
+        <section id="deputados">
+            <h2>Principais Deputados</h2>
+            <div class="cards-grid" id="cards-container">
+                <!-- Os cards são colocados dinamicamente aqui-->
             </div>
         </section>
 
 
-        <section class="flip-card-section">
-            <h2>Informações Relevantes</h2>
-            <div class="flip-container">
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <h3>Frente do Cartão 1</h3>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>Texto da parte de trás do cartão 1.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <h3>Frente do Cartão 2</h3>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>Texto da parte de trás do cartão 2.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <section class="texto-final">
+            <!-- Lista suspensa para selecionar o ano -->
+            <select id="anoSelecionado">
+                <option value="todos">Todos os Anos</option>
+                <option value="2014">2014</option>
+                <option value="2018">2018</option>
+                <option value="2022">2022</option>
+            </select>
 
+            <!-- Div para o gráfico -->
+            <div id="grafico"></div>
+        </section>
 
         <!-- Texto final -->
         <section class="texto-final">
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet...
+                .
             </p>
         </section>
+
+        <div class="container">
+            <label for="imageSelector">Escolha uma opção:</label>
+            <select id="imageSelector">
+                <option value="">Selecione...</option>
+                <option value="adalto-santos.png">Adalto Santos</option>
+                <option value="cleiton-collins.png">Pastor Cleiton Collins</option>
+                <option value="joel-da-harpa.png">Joel da Harpa</option>
+                <option value="junior-tercio.png">Júnior Tércio</option>
+                <option value="renato-antunes.png">Renato Antunes</option>
+                <option value="romero-sales-filho.png">Romero Sales Filho</option>
+                <option value="william-brigido.png">William Brigido</option>
+            </select>
+    
+            <div class="image-container">
+                <img id="displayedImage" src="" alt="Imagem Selecionada" style="display: none;">
+            </div>
+        </div>
+
     </main>
 
     <!-- Rodapé -->
     <footer>
         <p>
-            Créditos: <br />
-            Equipe de Jornalismo: Fulano, Ciclano <br />
-            Equipe de Computação: Beltrano <br />
-            Designer: Fulano de Tal
+            Créditos <br />
+            Equipe de Jornalismo:  <br />
+            Equipe de Computação:  <br />
+            Designer:
         </p>
     </footer>
 
     <script src="/script.js"></script>
 </body>
-
 </html>
