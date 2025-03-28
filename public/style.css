@@ -228,7 +228,30 @@ select {
 
 iframe {
     width: 80%;
-    height: 400px;
+    height: 800px;
     border: none;
     display: none; /* Todos começam ocultos */
+}
+
+/* Efeito de slide */
+.iframe-slide-enter {
+    transform: translateX(100%);
+    opacity: 0;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.iframe-slide-enter-active {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.iframe-slide-exit {
+    transform: translateX(0);
+    opacity: 1;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.iframe-slide-exit-active {
+    transform: translateX(-100%);
+    opacity: 0;
 }
