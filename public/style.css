@@ -231,8 +231,8 @@ select:hover {
 #palavras-container {
   position: relative;
   width: 80%;
-  max-width: 1200px;
-  height: 500px;
+  max-width: 1800px;
+  height: 600px;
   /*background: #081c3c;*/
   border: 2px /*solid #ccc*/;
   border-radius: 20px;
@@ -524,4 +524,18 @@ iframe {
     height: 5px;
     background-color: #476492;
     margin: 20px auto;
+}
+
+#CaixaCreditos {
+    text-align: center; /* Centraliza todo o conteúdo dentro da div */
+    margin-bottom: 10px; /* Espaçamento na parte inferior, se necessário */
+}
+
+#creditos {
+    font-family: 'NewYork', serif;
+    font-size: 10pt;
+    line-height: 32pt;
+    letter-spacing: -0.4px;
+    color: white;
+    text-decoration: none; /* Remove o sublinhado do link */
 }
