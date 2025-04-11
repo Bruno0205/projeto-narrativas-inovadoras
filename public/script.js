@@ -370,6 +370,7 @@ document.addEventListener("DOMContentLoaded", () => {
         link.textContent = item.palavra;
         link.style.fontSize = `${item.tamanho}%`;
 
+
         cloud.appendChild(link);
         container.appendChild(cloud);
         elementosExistentes.push(cloud);

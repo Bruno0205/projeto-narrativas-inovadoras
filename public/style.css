@@ -118,6 +118,7 @@ p {
   gap: 20px;
   justify-content: center;
   margin-top: 20px;
+  margin-bottom: 100px
 }
 
 .card {
@@ -510,4 +511,11 @@ iframe {
     height: 1px; 
     background-color: #ccc; 
     margin: 20px auto; 
+}
+
+.linha-separadora2 {
+    width: 70%;
+    height: 5px;
+    background-color: #476492;
+    margin: 20px auto;
 }
