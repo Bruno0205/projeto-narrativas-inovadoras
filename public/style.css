@@ -29,15 +29,15 @@ main section.texto-final {
   justify-content: space-between;
   align-items: stretch;
   padding: 40px 20px;
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
   gap: 20px;
 }
 
 .grafico-e-texto .texto {
   flex: 1 1 55%;
-  max-width: 80%;
-  font-size: 1em;
+  max-width: 50%;
+  font-size: 10pt;
 }
 
 .grafico-e-texto .grafico {
